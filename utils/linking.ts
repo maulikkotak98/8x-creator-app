@@ -1,4 +1,4 @@
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking } from "react-native";
 
 /**
  * Safely opens a URL in the device browser or relevant app.
@@ -10,10 +10,13 @@ export async function openUrl(url: string): Promise<void> {
     if (supported) {
       await Linking.openURL(url);
     } else {
-      Alert.alert('Cannot open link', 'This URL cannot be opened on your device.');
+      Alert.alert(
+        "Cannot open link",
+        "This URL cannot be opened on your device.",
+      );
     }
   } catch {
-    Alert.alert('Error', 'Something went wrong while opening this link.');
+    Alert.alert("Error", "Something went wrong while opening this link.");
   }
 }
 
@@ -24,7 +27,7 @@ export async function openUrl(url: string): Promise<void> {
 export function isValidVideoUrl(url: string): boolean {
   const trimmed = url.trim();
   return (
-    trimmed.startsWith('https://www.tiktok.com/') ||
-    trimmed.startsWith('https://www.instagram.com/')
+    trimmed.startsWith("https://www.tiktok.com/") ||
+    trimmed.startsWith("https://www.instagram.com/")
   );
 }

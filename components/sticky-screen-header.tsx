@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { AppColors } from '@/constants/colors';
-import { Spacing } from '@/constants/layout';
+import { AppColors } from "@/constants/colors";
+import { Spacing } from "@/constants/layout";
 
 type Props = {
   title: string;
@@ -21,7 +21,8 @@ export function StickyScreenHeader({ title, subtitle }: Props) {
         {
           paddingTop: insets.top + Spacing.sm,
         },
-      ]}>
+      ]}
+    >
       <Text style={styles.title}>{title}</Text>
       {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
     </View>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   title: {
     color: AppColors.textPrimary,
     fontSize: 30,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   subtitle: {
     color: AppColors.textSecondary,

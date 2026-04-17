@@ -1,22 +1,26 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { StatusBadge } from '@/components/status-badge';
-import { StickyScreenHeader } from '@/components/sticky-screen-header';
-import { AppColors } from '@/constants/colors';
-import { Radius, Spacing } from '@/constants/layout';
-import { useCreatorFlow } from '@/context/creator-flow-context';
-import { openUrl } from '@/utils/linking';
+import { StatusBadge } from "@/components/status-badge";
+import { StickyScreenHeader } from "@/components/sticky-screen-header";
+import { AppColors } from "@/constants/colors";
+import { Radius, Spacing } from "@/constants/layout";
+import { useCreatorFlow } from "@/context/creator-flow-context";
+import { openUrl } from "@/utils/linking";
 
 export default function SubmissionsScreen() {
   const { submissions } = useCreatorFlow();
 
   return (
     <View style={styles.root}>
-      <StickyScreenHeader title="My Submissions" subtitle={`${submissions.length} total`} />
+      <StickyScreenHeader
+        title="My Submissions"
+        subtitle={`${submissions.length} total`}
+      />
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         {submissions.map((submission) => (
           <View key={submission.id} style={styles.card}>
             <View style={styles.rowBetween}>
@@ -68,13 +72,13 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   rowBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   brand: {
     color: AppColors.textPrimary,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 16,
   },
   campaignTitle: {
@@ -95,12 +99,12 @@ const styles = StyleSheet.create({
   viewLink: {
     marginTop: Spacing.md,
     color: AppColors.blue,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   payout: {
     marginTop: Spacing.md,
     color: AppColors.green,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 18,
   },
 });
