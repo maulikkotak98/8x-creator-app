@@ -30,7 +30,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="submissions"
         options={{
           title: "My Submissions",
           tabBarIcon: ({ color }) => (

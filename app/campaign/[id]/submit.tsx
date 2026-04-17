@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -9,24 +9,27 @@ import {
   Text,
   TextInput,
   View,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { BackButton } from '@/components/back-button';
-import { AppColors } from '@/constants/colors';
-import { Radius, Spacing } from '@/constants/layout';
-import { useCreatorFlow } from '@/context/creator-flow-context';
+import { BackButton } from "@/components/back-button";
+import { AppColors } from "@/constants/colors";
+import { Radius, Spacing } from "@/constants/layout";
+import { useCreatorFlow } from "@/context/creator-flow-context";
 
 export default function SubmitVideoScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { campaigns, submitVideo } = useCreatorFlow();
 
-  const [videoUrl, setVideoUrl] = useState('');
-  const [error, setError] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
+  const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const campaign = useMemo(() => campaigns.find((c) => c.id === id), [campaigns, id]);
+  const campaign = useMemo(
+    () => campaigns.find((c) => c.id === id),
+    [campaigns, id],
+  );
 
   const redirectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
@@ -49,34 +52,36 @@ export default function SubmitVideoScreen() {
   }
 
   const handleSubmit = () => {
-    setError('');
+    setError("");
     const result = submitVideo(campaign.id, videoUrl);
 
     if (!result.ok) {
-      setError(result.error ?? '');
+      setError(result.error ?? "");
       return;
     }
 
     setSubmitted(true);
-    setVideoUrl('');
+    setVideoUrl("");
 
     redirectTimerRef.current = setTimeout(() => {
-      router.replace('/explore');
+      router.replace("/submissions");
     }, 800);
   };
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
       <KeyboardAvoidingView
         style={styles.keyboardWrap}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}>
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+      >
         <ScrollView
           style={styles.scroll}
           contentContainerStyle={styles.scrollInner}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="interactive"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+        >
           <BackButton onPress={() => router.back()} />
 
           <Text style={styles.title}>Submit Video</Text>
@@ -95,8 +100,11 @@ export default function SubmitVideoScreen() {
               autoCorrect={false}
               keyboardType="url"
               returnKeyType="done"
-              {...(Platform.OS === 'ios'
-                ? ({ textContentType: 'URL', clearButtonMode: 'while-editing' } as const)
+              {...(Platform.OS === "ios"
+                ? ({
+                    textContentType: "URL",
+                    clearButtonMode: "while-editing",
+                  } as const)
                 : {})}
               onSubmitEditing={handleSubmit}
               style={styles.input}
@@ -107,7 +115,9 @@ export default function SubmitVideoScreen() {
 
           {error ? <Text style={styles.error}>{error}</Text> : null}
           {submitted ? (
-            <Text style={styles.success}>Submitted! Redirecting to My Submissions…</Text>
+            <Text style={styles.success}>
+              Submitted! Redirecting to My Submissions…
+            </Text>
           ) : null}
 
           <Pressable onPress={handleSubmit} style={styles.submitButton}>
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: AppColors.textPrimary,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 30,
     marginTop: Spacing.md,
   },
@@ -150,7 +160,7 @@ const styles = StyleSheet.create({
   label: {
     color: AppColors.textSectionTitle,
     letterSpacing: 1,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 12,
     marginBottom: Spacing.sm,
   },
@@ -160,7 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.cardBg,
     borderWidth: 1,
     borderColor: AppColors.cardBorder,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   input: {
     color: AppColors.textPrimary,
@@ -182,23 +192,23 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.green,
     borderRadius: Radius.md,
     paddingVertical: 14,
-    alignItems: 'center',
+    alignItems: "center",
   },
   submitButtonLabel: {
-    color: '#0b130f',
-    fontWeight: '700',
+    color: "#0b130f",
+    fontWeight: "700",
     fontSize: 16,
   },
   emptyState: {
     flex: 1,
     backgroundColor: AppColors.screenBg,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: Spacing.lg,
   },
   notFoundTitle: {
     color: AppColors.textPrimary,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 18,
   },
   emptyBackButton: {
@@ -210,6 +220,6 @@ const styles = StyleSheet.create({
   },
   emptyBackLabel: {
     color: AppColors.textPrimary,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
