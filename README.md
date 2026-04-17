@@ -1,50 +1,100 @@
-# Welcome to your Expo app 👋
+# Creator Mobile App (Expo + React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mock creator workflow app built with Expo Router and TypeScript.
 
-## Get started
+The app demonstrates an end-to-end submission flow using local seed data (no backend):
+- Browse active campaigns
+- Open campaign details (brief, do's/don'ts, example videos)
+- Submit a TikTok/Instagram video URL
+- Track submission status (pending/approved/rejected)
 
-1. Install dependencies
+## Tech Stack
 
-   ```bash
-   npm install
-   ```
+- Expo + React Native
+- Expo Router (file-based routing)
+- TypeScript
+- React Context for state management
 
-2. Start the app
+## Project Structure
 
-   ```bash
-   npx expo start
-   ```
+```txt
+app/
+  (tabs)/
+    _layout.tsx          # Tab navigator
+    index.tsx            # Campaign listing
+    submissions.tsx      # Submission status listing
+    profile.tsx          # Creator profile + derived stats
+  campaign/
+    [id].tsx             # Campaign details
+    [id]/
+      submit.tsx         # Submit video URL form
+  _layout.tsx            # Root providers + stack
 
-In the output, you'll find options to open the app in a
+components/
+  back-button.tsx        # Shared back navigation button
+  sticky-screen-header.tsx # Reusable screen title/header
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+constants/
+  colors.ts              # App color tokens
+  layout.ts              # Spacing/radius/layout tokens
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+context/
+  creator-flow-context.tsx  # Campaign/submission state + submit action
 
-## Get a fresh project
+data/
+  campaigns.ts           # Campaign seed data
+  submissions.ts         # Initial submission seed data
 
-When you're ready, run:
+types/
+  index.ts               # Typed domain models
 
-```bash
-npm run reset-project
+utils/
+  linking.ts             # URL validation + external link opening
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-## Learn more
+1. Install dependencies:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. Start the app:
 
-## Join the community
+```bash
+npm start
+```
 
-Join our community of developers creating universal apps.
+Useful platform commands:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm run ios
+npm run android
+npm run web
+```
+
+## Data and State
+
+- `CAMPAIGNS` and `SEED_SUBMISSIONS` are mocked in `data/`.
+- `CreatorFlowProvider` owns app state and exposes:
+  - `campaigns`
+  - `submissions`
+  - `submitVideo(campaignId, videoUrl)`
+- Submitting a video updates shared context state, so `My Submissions` and
+  `Profile` counts update immediately.
+- URL validation for submissions uses `isValidVideoUrl()` in `utils/linking.ts`.
+
+## Quality Checks
+
+Run before opening a PR:
+
+```bash
+npm run lint
+npx tsc --noEmit
+```
+
+## Notes
+
+- This project is intentionally backend-free for product flow prototyping.
+- UI is implemented to closely match the provided creator-app mockups.
