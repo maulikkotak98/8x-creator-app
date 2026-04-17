@@ -89,7 +89,7 @@ export default function SubmitVideoScreen() {
             {campaign.brand} · {campaign.title}
           </Text>
 
-          <Text style={styles.label}>VIDEO URL</Text>
+          <Text style={styles.label}>TikTok/Instagram Link</Text>
           <View style={styles.inputWrap}>
             <TextInput
               value={videoUrl}
