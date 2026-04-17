@@ -1,33 +1,50 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { HapticTab } from "@/components/haptic-tab";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { AppColors } from "@/constants/colors";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        sceneStyle: { backgroundColor: AppColors.screenBg },
+        tabBarStyle: {
+          backgroundColor: AppColors.tabBarBg,
+          borderTopColor: AppColors.tabBarBorder,
+        },
+        tabBarInactiveTintColor: AppColors.tabBarInactive,
+        tabBarActiveTintColor: AppColors.tabBarActive,
         headerShown: false,
         tabBarButton: HapticTab,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Campaigns",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={23} name="megaphone.fill" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "My Submissions",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={22} name="paperplane.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={22} name="person.fill" color={color} />
+          ),
         }}
       />
     </Tabs>
