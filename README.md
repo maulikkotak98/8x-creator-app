@@ -2,6 +2,10 @@
 
 A mock creator workflow app built with Expo Router and TypeScript.
 
+## Demo
+
+- Loom walkthrough: [https://www.loom.com/share/3bcf92866889481fa081eb2a8acf1c66](https://www.loom.com/share/3bcf92866889481fa081eb2a8acf1c66)
+
 The app demonstrates an end-to-end submission flow using local seed data (no backend):
 - Browse active campaigns
 - Open campaign details (brief, do's/don'ts, example videos)
@@ -84,17 +88,3 @@ npm run web
 - Submitting a video updates shared context state, so `My Submissions` and
   `Profile` counts update immediately.
 - URL validation for submissions uses `isValidVideoUrl()` in `utils/linking.ts`.
-
-## Quality Checks
-
-Run before opening a PR:
-
-```bash
-npm run lint
-npx tsc --noEmit
-```
-
-## Notes
-
-- This project is intentionally backend-free for product flow prototyping.
-- UI is implemented to closely match the provided creator-app mockups.
